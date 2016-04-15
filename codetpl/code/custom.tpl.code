@@ -1,0 +1,47 @@
+/**
+* 自定义查询数据表{{settings.target_table_list}}的记录
+* @ApiDescription(section="{{settings.target_table_list}}", description="{{settings.iname}}")
+* @ApiLazyRoute(uri="{{settings.iuri}}",method="{% if( settings.iget ==1 and settings.ipost == 1 ) %}GET|POST{% else %}{% if( settings.iget ==1 ) %}GET{% else %}POST{%  endif %}{%  endif %}")
+{% for item in settings['input-fileds'] %}
+* @ApiParams(name="{{item.field_enname}}", type="string",{% if( item.field_cannull == 0 ) %}nullable=false,check="{{item.field_checkfunction}}", {% else %}nullable=true,check="", {% endif %},description="{{item.field_cnname}}", cnname="{{item.field_cnname}}")
+{% endfor %}
+* @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
+*/
+ function {{method}}( {{ settings['input-fileds'] | join_names }} )
+{
+	{% if( settings.ipublic != 1 ) %}return send_error( 'AUTH' , '此接口已暂停服务' );{% endif %}
+
+	
+	// 输入过滤
+	{% for item in settings['input-fileds'] %}
+	
+	{# 检查可选参数的格式 #}
+	{% if item.field_cannull == 1 and item.field_checkfunction | length > 0 %}
+	if( isset( $_REQUEST['{{item.field_enname}}'] ) && !{{item.field_checkfunction}}( ${{item.field_enname}} ) )
+	{
+		return send_error( 'INPUT' , '字段{{item.field_cnname}}({{item.field_enname}})格式错误' );
+	}
+	{% endif %}
+
+	{# 过滤输入参数 #}
+	{% if(  item.field_table != '-phpfunction-'  ) %}
+		${{item.field_enname}} = {{item.field_filterfunction}}( ${{item.field_enname}} );
+	{% else %}
+		${{item.field_enname}} = {{item.field_filterfunction}}();
+	{% endif %}
+	
+	{% endfor %}
+
+	// 输入控制代码
+	{{settings.inputcode|clean_ptag|raw}}
+
+	
+	// 业务逻辑控制代码
+	{{settings.logiccode|clean_ptag|raw}}
+
+
+	// 输出控制代码
+	{{settings.outputcode|clean_ptag|raw}}
+
+	
+}

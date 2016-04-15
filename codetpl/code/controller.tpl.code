@@ -1,0 +1,60 @@
+<?php
+namespace
+{
+	{{functions|clean_ptag|raw}}
+
+	{% if mysql and mysql.mysql_host|length > 0 %}
+		$GLOBALS['lpconfig']['database']['dsn'] = 'mysql:host={{mysql.mysql_host}};port={{mysql.mysql_port}};dbname={{mysql.mysql_database}};charset=UTF8';
+		$GLOBALS['lpconfig']['database']['user'] = '{{mysql.mysql_user}}';
+		$GLOBALS['lpconfig']['database']['password'] = '{{mysql.mysql_password}}';
+	{% endif %}
+}
+
+namespace Lazyphp\Controller
+{
+	class LazyRestController extends AuthedController
+	{
+		public function __construct()
+	    {
+	        {% for aitem in noauth %}
+	        $noauth[] = '{{aitem}}';
+	        {% endfor %}
+    
+	        if( function_exists('lazyrest_auth_check') )
+	        {
+	        	if( !in_array( g('a') , $noauth ) )
+	        	{
+					$this->auth();
+					lazyrest_auth_check();
+	        	}
+	        }
+	    }
+
+	    {% for theadd in lcadd %}
+		{{theadd|clean_ptag|raw}}
+
+	    {% endfor %}
+
+	    {% for themodify in lcmodify %}
+		{{themodify|clean_ptag|raw}}
+
+	    {% endfor %}
+
+		{% for thedelete in lcdelete %}
+		{{thedelete|clean_ptag|raw}}
+
+	    {% endfor %}
+
+	    {% for thelist in lclist %}
+		{{thelist|clean_ptag|raw}}
+
+	    {% endfor %}
+
+	    {% for thecustom in lccustom %}
+		{{thecustom|clean_ptag|raw}}
+
+	    {% endfor %}
+	    
+	}
+}
+

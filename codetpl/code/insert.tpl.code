@@ -1,0 +1,83 @@
+/**
+* 向数据表{{settings.target_table_list}}添加记录
+* @ApiDescription(section="{{settings.target_table_list}}", description="{{settings.iname}}")
+* @ApiLazyRoute(uri="{{settings.iuri}}",method="{% if( settings.iget ==1 and settings.ipost == 1 ) %}GET|POST{% else %}{% if( settings.iget ==1 ) %}GET{% else %}POST{%  endif %}{%  endif %}")
+{% for item in settings['input-fileds'] %}
+* @ApiParams(name="{{item.field_enname}}", type="string",{% if( item.field_cannull == 0 ) %}nullable=false{% else %}nullable=true{% endif %},description="{{item.field_cnname}}", check="{{item.field_checkfunction}}", cnname="{{item.field_cnname}}")
+{% endfor %}
+* @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
+*/
+ function {{method}}( {{ settings['input-fileds'] | join_names }} )
+{
+	// 输入函数过滤
+	{% for item in settings['input-fileds'] %}
+	{% if( item.field_filterfunction | length > 0 ) %}
+		{% if(  item.field_table != '-phpfunction-'  ) %}
+			${{item.field_enname}} = {{item.field_filterfunction}}( ${{item.field_enname}} );
+		{% else %}
+			${{item.field_enname}} = {{item.field_filterfunction}}();
+		{% endif %}		
+	{% endif %}
+	{% endfor %}
+
+	// 输入控制代码
+	{{settings.inputcode|clean_ptag|raw}}
+
+	// 检查唯一
+	{%for item in settings['unique-fileds'] %}
+	if( get_var("SELECT COUNT(*) FROM `{{settings.target_table_list}}` WHERE `{{item.field_enname}}` = '" . s( ${{item.field_enname}} ) . "'") > 0 )
+	{
+		return send_error('INPUT' , '{{item.field_cnname}}字段不能重复');
+	}
+			 	
+	{% endfor %}
+
+
+	// 拼接SQL
+	{% for item in settings['input-fileds']%}
+	
+		{# 数据来自REQUEST的字段 #}
+		{% if( item.field_table == settings.target_table_list ) %}
+		$pre_field[] = '`{{item.field_enname}}`';
+		$post_field[] = "'" . s( ${{item.field_enname}} ) . "'";
+		{% endif %}
+		
+		{# 数据来自php函数的字段 #}
+		{% if( item.field_table == '-phpfunction-' ) %}
+		$pre_field[] = '`{{item.field_enname}}`';
+		$post_field[] = "'" . s( {{item.field_filterfunction}}() ) . "'";
+		{% endif %}
+
+	{% endfor %}
+
+	// 业务逻辑控制代码
+	{{settings.logiccode|clean_ptag|raw}}
+
+
+	$sql = "INSERT INTO `{{settings.target_table_list}}` ( " . join( ' , ' , $pre_field ) . " ) VALUES ( " . join( ' , ' , $post_field ) . " )  ";
+
+	run_sql( $sql );
+	$theid = last_id();
+
+	{% for item in settings['output-fileds']%}
+	{# if( item.field_table == settings.target_table_list ) #}
+	$out_field[] = '`{{item.field_enname}}`';
+	{# endif #}
+	{% endfor %}	
+
+	$return_item = get_line("SELECT " . join( ' , ' , $out_field ) . " FROM `{{settings.target_table_list}}` WHERE `id` = '" . intval( $theid ) . "' LIMIT 1");
+
+	// 输出控制代码
+	{{settings.outputcode|clean_ptag|raw}}
+
+	if( $return_item )
+	{
+		return render_json( $return_item );	
+	} 
+	else
+	{
+		return send_error('DATABASE' , '数据插入失败');
+	};
+
+
+}

@@ -1,0 +1,162 @@
+/**
+* 查询数据表{{settings.target_table_list}}的记录
+* @ApiDescription(section="{{settings.target_table_list}}", description="{{settings.iname}}")
+* @ApiLazyRoute(uri="{{settings.iuri}}",method="{% if( settings.iget ==1 and settings.ipost == 1 ) %}GET|POST{% else %}{% if( settings.iget ==1 ) %}GET{% else %}POST{%  endif %}{%  endif %}")
+{% for item in settings['input-fileds'] %}
+* @ApiParams(name="{{item.field_enname}}", type="string",{% if( item.field_cannull == 0 ) %}nullable=false,check="{{item.field_checkfunction}}", {% else %}nullable=true,check="", {% endif %},description="{{item.field_cnname}}", cnname="{{item.field_cnname}}")
+{% endfor %}
+* @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
+*/
+ function {{method}}( {{ settings['input-fileds'] | join_names }} )
+{
+	{% if( settings.ipublic != 1 ) %}return send_error( 'AUTH' , '此接口已暂停服务' );{% endif %}
+
+	$page_count = 10;
+	$where_logic = ' AND ';
+
+	// 输入过滤
+	{% for item in settings['input-fileds'] %}
+	
+	{# 检查可选参数的格式 #}
+	{% if item.field_checkfunction | length > 0 %}
+	if( isset( $_REQUEST['{{item.field_enname}}'] ) && !{{item.field_checkfunction}}( ${{item.field_enname}} ) )
+	{
+		return send_error( 'INPUT' , '字段{{item.field_cnname}}({{item.field_enname}})格式错误' );
+	}
+	{% endif %}
+
+	{% if( item.field_filterfunction | length > 0 ) %}
+		{% if(  item.field_table != '-phpfunction-'  ) %}
+			${{item.field_enname}} = {{item.field_filterfunction}}( ${{item.field_enname}} );
+		{% else %}
+			${{item.field_enname}} = {{item.field_filterfunction}}();
+		{% endif %}		
+	{% endif %}
+	
+	{% endfor %}
+
+	// 输入控制代码
+	{{settings.inputcode|clean_ptag|raw}}
+
+	
+	// 拼接SQL准备
+
+	{% for item in settings['lwhere-fileds'] %}
+		if( strlen( ${{item.field_enname}} ) > 0 )
+		{
+			{# 匹配类型 = #}
+			{% if( item.field_eq == 1 ) %}
+				$lwhere_field = '`{{item.field_enname}}` = ';
+			
+				{% if( item.field_table == '-phpfunction-' ) %}
+				$lwhere_field .= "'" . s( {{item.field_filterfunction}}() ) . "'";
+				{% endif %}
+				
+				{% if( item.field_table == settings.target_table_list ) %}
+				$lwhere_field .= "'" . s( ${{item.field_enname}} ) . "'";
+				{% endif %}
+			{% endif %}
+
+			{# 匹配类型 % #}
+			{% if( item.field_eq == 2 ) %}
+				$lwhere_field = '`{{item.field_enname}}` ';
+			
+				{% if( item.field_table == '-phpfunction-' ) %}
+				$lwhere_field .= "LIKE '%" . s( {{item.field_filterfunction}}() ) . "%'";
+				{% endif %}
+				
+				{% if( item.field_table == settings.target_table_list ) %}
+				$lwhere_field .= "LIKE '%" . s( ${{item.field_enname}} ) . "%'";
+				{% endif %}
+			{% endif %}
+
+			$lwhere_fields[] = $lwhere_field;
+		}
+	{% endfor %}
+
+	if( isset( $lwhere_fields ) )
+		$list_where =  join( $where_logic , $lwhere_fields ) . " ";
+	else
+		$list_where = "";
+	
+
+
+	// 检查该记录是否存在
+	// 处理返回值
+	{% for item in settings['output-fileds']%}
+	$out_field[] = '`{{item.field_enname}}`';
+	{% endfor %}
+
+	// sinceID
+	$sid = intval(v('_since_id'));
+
+	if( intval(v('_count')) > 0 ) $page_count = intval(v('_count'));
+	if( $page_count > 1000 ) $page_count = 1000;
+	$limit_sql = " LIMIT " . $page_count;
+	
+	// 排序
+	$by = z(t(v('_order_by')));
+	if( strlen( $by ) < 1 ) $by = 'id';
+
+	$table_fields = array();
+	{% for fitem in table_fields %}
+	$table_fields[] = '{{fitem}}'; 
+	{% endfor %}
+	if( !in_array( $by , $table_fields ) ) return send_error('INPUT' , '错误的字段名称');
+
+	if( strtolower(t(v('_order'))) == 'asc' )
+	{
+		$order_sql = " ORDER BY `" . $by . "` ASC ";
+		
+		if( $sid > 0 )
+			$where_fields[] = " `id` >= '" . intval( $sid ) . "' ";
+	} 
+	else
+	{
+		$order_sql = " ORDER BY `" . $by . "` DESC ";	
+		if( $sid > 0 )
+			$where_fields[] = " `id` <= '" . intval( $sid ) . "' ";
+	}
+		
+	
+	if( isset($where_fields) )
+		$main_where = join( " AND " , $where_fields );
+	else	
+		$main_where = "";
+
+	
+	if( strlen( $list_where ) > 0 && strlen( $main_where ) > 0 )
+		$where_sql = " WHERE " . $main_where . " AND " . $list_where ;
+	elseif( strlen( $list_where ) > 0 )
+		$where_sql = " WHERE " . $list_where ;
+	elseif( strlen( $main_where ) > 0 )	
+		$where_sql = " WHERE " . $main_where ;
+	else
+		$where_sql = "";			
+
+	// 业务逻辑控制代码
+	{{settings.logiccode|clean_ptag|raw}}		
+
+	$sql = "SELECT " . join( ' , ' , $out_field ) . " FROM `{{settings.target_table_list}}` " . $where_sql . " " . $order_sql  . " " . $limit_sql ;
+	
+
+	$return_item = get_data( $sql );
+
+	// 输出控制代码
+	{{settings.outputcode|clean_ptag|raw}}
+
+	if( $return_item )
+	{
+		foreach( $return_item as $item )
+			$iid[] = $item['id'];
+
+		$return_item['max_id'] = max( $iid );
+		$return_item['min_id'] = min( $iid );
+
+		return render_json( $return_item );	
+	} 
+	else
+	{
+		return send_error('NODATA' , '没有对应的记录，可能数据表为空');
+	};
+}

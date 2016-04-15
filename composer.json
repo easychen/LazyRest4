@@ -1,0 +1,27 @@
+{
+    "require":
+    {
+        "php":">=5.3.3",
+        "twig/twig": "~1.0"
+    },
+    "require-dev":     
+    {      
+        "behat/behat": "2.4.*@stable",     
+        "behat/mink": "1.4@stable",        
+        "behat/mink-extension": "*",       
+        "behat/mink-goutte-driver": "1.0.*@dev",       
+        "crada/php-apidoc": "@dev",     
+        "robmorgan/phinx": "*"     
+    },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Lazyphp\\": "_lp/lib/Lazyphp/",
+            "Lazyphp\\Controller\\": "controller/"
+        }
+    },
+    "config": {
+        "secure-http": false
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "LazyRest4",
+  "homepage": "https://github.com/easychen/LazyPHP4",
+  "authors": [
+    "EasyChen <easychen@qq.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/bower_components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "font-awesome": "fontawesome#^4.6.1",
+    "ace-builds": "^1.2.3",
+    "jquery": "~2.2.3"
+  }
+}

@@ -1,0 +1,110 @@
+/**
+* 修改数据表{{settings.target_table_list}}的记录
+* @ApiDescription(section="{{settings.target_table_list}}", description="{{settings.iname}}")
+* @ApiLazyRoute(uri="{{settings.iuri}}",method="{% if( settings.iget ==1 and settings.ipost == 1 ) %}GET|POST{% else %}{% if( settings.iget ==1 ) %}GET{% else %}POST{%  endif %}{%  endif %}")
+{% for item in settings['input-fileds'] %}
+* @ApiParams(name="{{item.field_enname}}", type="string",{% if( item.field_cannull == 0 ) %}nullable=false,check="{{item.field_checkfunction}}", {% else %}nullable=true,check="", {% endif %},description="{{item.field_cnname}}", cnname="{{item.field_cnname}}")
+{% endfor %}
+* @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
+*/
+ function {{method}}( {{ settings['input-fileds'] | join_names }} )
+{
+	$where_logic = ' AND ';
+
+	// 输入过滤
+	{% for item in settings['input-fileds'] %}
+	{% if( item.field_filterfunction | length > 0 ) %}
+		{% if(  item.field_table != '-phpfunction-'  ) %}
+			${{item.field_enname}} = {{item.field_filterfunction}}( ${{item.field_enname}} );
+		{% else %}
+			${{item.field_enname}} = {{item.field_filterfunction}}();
+		{% endif %}		
+	{% endif %}
+	{% endfor %}
+
+	// 输入控制代码
+	{{settings.inputcode|clean_ptag|raw}}
+
+	
+	// 拼接SQL准备
+
+	{% for item in settings['input-fileds'] %}
+	// 如果参与了请求，就放进来，不用strlen，以处理值为空的情况
+	
+	{# if(  strlen(${{item.field_enname}}) > 0  )#}
+	if(  isset($_REQUEST['{{item.field_enname}}'])  )
+	{
+		{% if item.field_checkfunction | length > 0 %}
+		if( {{item.field_checkfunction}}( ${{item.field_enname}} ) )
+		{
+		{% endif %}
+
+		$update_field = '`{{item.field_enname}}` = ';
+		
+		{% if( item.field_table == '-phpfunction-' ) %}
+		$update_field .= "'" . s( {{item.field_filterfunction}}() ) . "'";
+		{% endif %}
+		
+		{% if( item.field_table == settings.target_table_list ) %}
+		$update_field .= "'" . s( ${{item.field_enname}} ) . "'";
+		{% endif %}
+
+		$update_fields[] = $update_field;
+
+		{% if item.field_checkfunction | length > 0 %}
+		}
+		else
+		{
+			return send_error( 'INPUT' , '参数{{item.field_cnname}}({{item.field_enname}})的格式不正确' );
+		}
+		{% endif %}
+
+	} 
+	{% endfor %}
+
+	{% for item in settings['mwhere-fileds'] %}
+	$mwhere_field = '`{{item.field_enname}}` = ';
+		
+	{% if( item.field_table == '-phpfunction-' ) %}
+	$mwhere_field .= "'" . s( {{item.field_filterfunction}}() ) . "'";
+	{% endif %}
+	
+	{% if( item.field_table == settings.target_table_list ) %}
+	$mwhere_field .= "'" . s( ${{item.field_enname}} ) . "'";
+	{% endif %}
+
+	$mwhere_fields[] = $mwhere_field;	
+	{% endfor %}
+
+	// 检查该记录是否存在
+	$sql = "SELECT * FROM `{{settings.target_table_list}}` WHERE " . join( ' AND ' , $mwhere_fields ) . " LIMIT 1";
+	if( !$last = get_line( $sql )) return send_error( 'INPUT' , '记录不存在，可能您权限不足或已被删除' );
+
+	// 业务逻辑控制代码
+	{{settings.logiccode|clean_ptag|raw}}
+
+	// 拼接SQL
+	$sql = "UPDATE `{{settings.target_table_list}}` SET " . join( ' , ' , $update_fields ) . " WHERE " . join( ' AND ' , $mwhere_fields ) . " LIMIT 1";
+	
+
+	run_sql( $sql );
+
+	// 处理返回值
+	{% for item in settings['output-fileds']%}
+	$out_field[] = '`{{item.field_enname}}`';
+	{% endfor %}	
+
+	$return_item = get_line("SELECT " . join( ' , ' , $out_field ) . " FROM `{{settings.target_table_list}}` WHERE " . join( $where_logic , $mwhere_fields ) . " LIMIT 1");
+
+	// 输出控制代码
+	{{settings.outputcode|clean_ptag|raw}}
+
+	if( $return_item )
+	{
+		return render_json( $return_item );	
+	} 
+	else
+	{
+		return send_error('DATABASE' , '数据更新失败');
+	};
+}
