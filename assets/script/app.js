@@ -343,9 +343,16 @@ function field_delete(  type )
 
 }
 
-function interface_info_delete()
+function interface_delete( id )
 {
-	//info.iname
+	if( confirm( '确定删除接口数据？本操作是不可恢复的哟' ) )
+	{
+		post( '/interface/remove' , {'id':id } , function( data )
+		{
+			window.location.reload();
+		});
+	}
+	
 }
 
 

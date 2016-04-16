@@ -21,7 +21,7 @@
 			<div class="col-md-4 text-right">
 				<button class="btn btn-primary btn-lg right5" onclick="interface_modify('<?=$item['iname']?>');">编辑</button>&nbsp;
 				<!-- <button class="btn btn-default btn-lg right5">访问</button>&nbsp; -->
-				<!-- <button class="btn btn-error btn-lg right5">删除</button> -->
+				<button class="btn btn-error btn-lg right5" onclick="interface_delete('<?=$item['id']?>');">删除</button>
 				
 			</div>
 			

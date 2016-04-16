@@ -93,304 +93,6 @@ $GLOBALS['meta'] = array (
       ),
     ),
   ),
-  '8bc26d73ebb82b1e73e93c5b13678883' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'code',
-        'description' => '添加代码',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'POST /code/add',
-        'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/code/add")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'create_at',
-        'filters' => 
-        array (
-          0 => '',
-        ),
-        'cnname' => '创建时间',
-      ),
-      1 => 
-      array (
-        'name' => 'private',
-        'filters' => 
-        array (
-          0 => '',
-        ),
-        'cnname' => '只对自己可见',
-      ),
-      2 => 
-      array (
-        'name' => 'uid',
-        'filters' => 
-        array (
-          0 => '',
-        ),
-        'cnname' => '用户ID',
-      ),
-      3 => 
-      array (
-        'name' => 'code',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '代码',
-      ),
-      4 => 
-      array (
-        'name' => 'name',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '函数名称',
-      ),
-      5 => 
-      array (
-        'name' => 'uname',
-        'filters' => 
-        array (
-          0 => '',
-        ),
-        'cnname' => '用户名',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'create_at' => 
-      array (
-        'name' => 'create_at',
-      ),
-      'private' => 
-      array (
-        'name' => 'private',
-      ),
-      'uid' => 
-      array (
-        'name' => 'uid',
-      ),
-      'code' => 
-      array (
-        'name' => 'code',
-      ),
-      'name' => 
-      array (
-        'name' => 'name',
-      ),
-      'uname' => 
-      array (
-        'name' => 'uname',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'POST /code/add',
-        'params' => false,
-      ),
-    ),
-  ),
-  'afc665c0bb0a46039573d6a8e9a2adfa' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'code',
-        'description' => '修改代码',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'POST /code/update',
-        'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/code/update")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '',
-      ),
-      1 => 
-      array (
-        'name' => 'code',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '代码',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-      ),
-      'code' => 
-      array (
-        'name' => 'code',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'POST /code/update',
-        'params' => false,
-      ),
-    ),
-  ),
-  'a105ca33dc7777f4a08f29d9fa23a522' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'code',
-        'description' => '删除代码',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'POST /code/remove',
-        'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/code/remove")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'id',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => 'id',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'id' => 
-      array (
-        'name' => 'id',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'POST /code/remove',
-        'params' => false,
-      ),
-    ),
-  ),
-  'a3db8b7fa3e4a5310fe2d0e1b2727293' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'code',
-        'description' => '代码列表',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'GET /code/list',
-        'ApiMethod' => '(type="GET")',
-        'ApiRoute' => '(name="/code/list")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'name',
-        'filters' => 
-        array (
-          0 => '',
-        ),
-        'cnname' => '函数名称',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'name' => 
-      array (
-        'name' => 'name',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'GET /code/list',
-        'params' => false,
-      ),
-    ),
-  ),
   'adf2fcb06b2ee665aff2eb2aabd0b319' => 
   array (
     'Description' => 
@@ -1261,6 +963,61 @@ $GLOBALS['meta'] = array (
       ),
     ),
   ),
+  '5d6aecff6be60c1be68f608a01144f5b' => 
+  array (
+    'Description' => 
+    array (
+      0 => 
+      array (
+        'section' => 'Project',
+        'description' => '删除接口',
+      ),
+    ),
+    'LazyRoute' => 
+    array (
+      0 => 
+      array (
+        'route' => 'POST /interface/remove',
+        'ApiMethod' => '(type="POST")',
+        'ApiRoute' => '(name="/interface/remove")',
+      ),
+    ),
+    'Params' => 
+    array (
+      0 => 
+      array (
+        'name' => 'id',
+        'filters' => 
+        array (
+          0 => 'check_not_empty',
+        ),
+        'cnname' => 'id',
+      ),
+    ),
+    'Return' => 
+    array (
+      0 => 
+      array (
+        'type' => 'object',
+        'sample' => '{\'code\': 0,\'message\': \'success\'}',
+      ),
+    ),
+    'binding' => 
+    array (
+      'id' => 
+      array (
+        'name' => 'id',
+      ),
+    ),
+    'route' => 
+    array (
+      0 => 
+      array (
+        'uri' => 'POST /interface/remove',
+        'params' => false,
+      ),
+    ),
+  ),
   '53a2cc6c42b4381e93bf4f6e4122d73b' => 
   array (
     'Description' => 
@@ -1301,10 +1058,6 @@ $GLOBALS['meta'] = array (
 );
 $app = new \Lazyphp\Core\Application();
 $app->route('POST /account/reg',array( 'Lazyphp\Controller\LazyRestController','user_lcadd_1460691333694'));
-$app->route('POST /code/add',array( 'Lazyphp\Controller\LazyRestController','code_lcadd_1460696636149'));
-$app->route('POST /code/update',array( 'Lazyphp\Controller\LazyRestController','code_lcmodify_1460698671844'));
-$app->route('POST /code/remove',array( 'Lazyphp\Controller\LazyRestController','code_lcdelete_1460700170635'));
-$app->route('GET /code/list',array( 'Lazyphp\Controller\LazyRestController','code_lclist_1460699036930'));
 $app->route('POST /account/token',array( 'Lazyphp\Controller\LazyRestController','user_lccustom_1460694654897'));
 $app->route('GET|POST /interface/field/add',array( 'Lazyphp\Controller\LazyphpController','field_add'));
 $app->route('GET /',array( 'Lazyphp\Controller\LazyphpController','index'));
@@ -1323,6 +1076,7 @@ $app->route('GET /logout',array( 'Lazyphp\Controller\LazyphpController','logout'
 $app->route('GET|POST /table/fields',array( 'Lazyphp\Controller\LazyphpController','getfields'));
 $app->route('GET /session',array( 'Lazyphp\Controller\LazyphpController','session'));
 $app->route('GET|POST /code/build',array( 'Lazyphp\Controller\LazyphpController','code_build'));
+$app->route('POST /interface/remove',array( 'Lazyphp\Controller\LazyphpController','interface_remove'));
 $app->route('GET /interface/create',array( 'Lazyphp\Controller\LazyphpController','interface_create'));
 $app->run();
 }

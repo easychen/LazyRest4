@@ -412,6 +412,28 @@ class LazyphpController
     }
 
     /**
+     * 删除接口
+     * @ApiDescription(section="Project", description="删除接口")
+     * @ApiLazyRoute(uri="/interface/remove",method="POST")
+     * @ApiParams(name="id", type="string", nullable=false, description="id", check="check_not_empty", cnname="id")
+     * @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
+     */
+    public function interface_remove( $id )
+    {
+        foreach( $_SESSION['current_project']['interface']['info'] as $key => $item )
+        {
+            $item = json_decode( $item , 1 );
+            if( $item['id'] == $id )
+            {
+                $remove_name = $item['iname'];
+                unset($_SESSION['current_project']['interface']['info'][$key]);
+            }
+        }
+
+        return render_json( 'done' );
+    }
+
+    /**
      * 创建接口
      * @ApiDescription(section="Project", description="创建接口")
      * @ApiLazyRoute(uri="/interface/create",method="GET")

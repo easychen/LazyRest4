@@ -98,6 +98,13 @@
     <tbody>
         
 <tr>
+    <td>password</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>密码</td>
+</tr>
+
+<tr>
     <td>name</td>
     <td>string</td>
     <td>Yes</td>
@@ -108,14 +115,7 @@
     <td>email</td>
     <td>string</td>
     <td>Yes</td>
-    <td>email地址</td>
-</tr>
-
-<tr>
-    <td>password</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>密码</td>
+    <td>电子邮件</td>
 </tr>
     </tbody>
 </table>
@@ -130,15 +130,15 @@
 <form enctype="application/x-www-form-urlencoded" role="form" action="/account/reg" method="POST" name="form0" id="form0">
     
 <div class="form-group">
+    <input type="text" class="form-control input-sm" id="password" placeholder="password" name="password">
+</div>
+
+<div class="form-group">
     <input type="text" class="form-control input-sm" id="name" placeholder="name" name="name">
 </div>
 
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="email" placeholder="email" name="email">
-</div>
-
-<div class="form-group">
-    <input type="text" class="form-control input-sm" id="password" placeholder="password" name="password">
 </div>
     <button type="submit" class="btn btn-success send" rel="0">Send</button>
 </form>
@@ -214,10 +214,10 @@
 </tr>
 
 <tr>
-    <td>uname</td>
+    <td>private</td>
     <td>string</td>
-    <td>Yes</td>
-    <td>用户名</td>
+    <td>No</td>
+    <td>只对自己可见</td>
 </tr>
 
 <tr>
@@ -235,10 +235,17 @@
 </tr>
 
 <tr>
-    <td>private</td>
+    <td>name</td>
     <td>string</td>
     <td>Yes</td>
-    <td>只对自己可见</td>
+    <td>函数名称</td>
+</tr>
+
+<tr>
+    <td>uname</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>用户名</td>
 </tr>
     </tbody>
 </table>
@@ -257,7 +264,7 @@
 </div>
 
 <div class="form-group">
-    <input type="text" class="form-control input-sm" id="uname" placeholder="uname" name="uname">
+    <input type="text" class="form-control input-sm" id="private" placeholder="private" name="private">
 </div>
 
 <div class="form-group">
@@ -269,7 +276,11 @@
 </div>
 
 <div class="form-group">
-    <input type="text" class="form-control input-sm" id="private" placeholder="private" name="private">
+    <input type="text" class="form-control input-sm" id="name" placeholder="name" name="name">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="uname" placeholder="uname" name="uname">
 </div>
     <button type="submit" class="btn btn-success send" rel="1">Send</button>
 </form>
@@ -305,7 +316,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2"> /code/remove</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2"> /code/update</a>
         </h4>
     </div>
     <div id="collapseOne2" class="panel-collapse collapse">
@@ -322,7 +333,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info2">
-                    删除代码
+                    修改代码
                     <hr>
                     
 <table class="table table-hover">
@@ -342,6 +353,13 @@
     <td>Yes</td>
     <td></td>
 </tr>
+
+<tr>
+    <td>code</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>代码</td>
+</tr>
     </tbody>
 </table>
                 </div><!-- #info -->
@@ -352,10 +370,14 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/code/remove" method="POST" name="form2" id="form2">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/code/update" method="POST" name="form2" id="form2">
     
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="id" placeholder="id" name="id">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="code" placeholder="code" name="code">
 </div>
     <button type="submit" class="btn btn-success send" rel="2">Send</button>
 </form>
@@ -391,7 +413,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion3" href="#collapseOne3"> /code/list</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion3" href="#collapseOne3"> /code/remove</a>
         </h4>
     </div>
     <div id="collapseOne3" class="panel-collapse collapse">
@@ -408,7 +430,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info3">
-                    浏览代码
+                    删除代码
                     <hr>
                     
 <table class="table table-hover">
@@ -423,10 +445,10 @@
     <tbody>
         
 <tr>
-    <td>name</td>
+    <td>id</td>
     <td>string</td>
-    <td>No</td>
-    <td>函数名称</td>
+    <td>Yes</td>
+    <td>id</td>
 </tr>
     </tbody>
 </table>
@@ -438,10 +460,10 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/code/list" method="GET" name="form3" id="form3">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/code/remove" method="POST" name="form3" id="form3">
     
 <div class="form-group">
-    <input type="text" class="form-control input-sm" id="name" placeholder="name" name="name">
+    <input type="text" class="form-control input-sm" id="id" placeholder="id" name="id">
 </div>
     <button type="submit" class="btn btn-success send" rel="3">Send</button>
 </form>
@@ -477,7 +499,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> /code/update</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> /code/list</a>
         </h4>
     </div>
     <div id="collapseOne4" class="panel-collapse collapse">
@@ -494,7 +516,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info4">
-                    修改代码
+                    代码列表
                     <hr>
                     
 <table class="table table-hover">
@@ -509,10 +531,10 @@
     <tbody>
         
 <tr>
-    <td>code</td>
+    <td>name</td>
     <td>string</td>
-    <td>Yes</td>
-    <td>代码</td>
+    <td>No</td>
+    <td>函数名称</td>
 </tr>
     </tbody>
 </table>
@@ -524,10 +546,10 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/code/update" method="POST" name="form4" id="form4">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/code/list" method="GET" name="form4" id="form4">
     
 <div class="form-group">
-    <input type="text" class="form-control input-sm" id="code" placeholder="code" name="code">
+    <input type="text" class="form-control input-sm" id="name" placeholder="name" name="name">
 </div>
     <button type="submit" class="btn btn-success send" rel="4">Send</button>
 </form>
@@ -581,7 +603,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info5">
-                    获取登入Token
+                    获得token
                     <hr>
                     
 <table class="table table-hover">
@@ -657,12 +679,12 @@
         </div>
     </div>
 </div>
-<h2>code</h2>
+<h2>Interface</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion6" href="#collapseOne6"> /code/detail</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion6" href="#collapseOne6"> /interface/field/add</a>
         </h4>
     </div>
     <div id="collapseOne6" class="panel-collapse collapse">
@@ -679,28 +701,9 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info6">
-                    函数详情
+                    默认提示
                     <hr>
                     
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-<tr>
-    <td>id</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>ID</td>
-</tr>
-    </tbody>
-</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox6">
@@ -709,13 +712,6 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/code/detail" method="GET" name="form6" id="form6">
-    
-<div class="form-group">
-    <input type="text" class="form-control input-sm" id="id" placeholder="id" name="id">
-</div>
-    <button type="submit" class="btn btn-success send" rel="6">Send</button>
-</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -744,12 +740,12 @@
         </div>
     </div>
 </div>
-<h2>Interface</h2>
+<h2>Demo</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion7" href="#collapseOne7"> /interface/field/add</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion7" href="#collapseOne7"> /</a>
         </h4>
     </div>
     <div id="collapseOne7" class="panel-collapse collapse">
@@ -805,12 +801,12 @@
         </div>
     </div>
 </div>
-<h2>Demo</h2>
+<h2>User</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion8" href="#collapseOne8"> /</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion8" href="#collapseOne8"> /login</a>
         </h4>
     </div>
     <div id="collapseOne8" class="panel-collapse collapse">
@@ -827,7 +823,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info8">
-                    默认提示
+                    用户登入页面
                     <hr>
                     
                 </div><!-- #info -->
@@ -866,12 +862,11 @@
         </div>
     </div>
 </div>
-<h2>User</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion9" href="#collapseOne9"> /login</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion9" href="#collapseOne9"> /login_check</a>
         </h4>
     </div>
     <div id="collapseOne9" class="panel-collapse collapse">
@@ -888,9 +883,35 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info9">
-                    用户登入页面
+                    用户登入检查
                     <hr>
                     
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+<tr>
+    <td>email</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>Email</td>
+</tr>
+
+<tr>
+    <td>password</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>密码</td>
+</tr>
+    </tbody>
+</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox9">
@@ -899,6 +920,17 @@
                             Parameters
                             <hr>
                             
+<form enctype="application/x-www-form-urlencoded" role="form" action="/login_check" method="GET|POST" name="form9" id="form9">
+    
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="email" placeholder="email" name="email">
+</div>
+
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="password" placeholder="password" name="password">
+</div>
+    <button type="submit" class="btn btn-success send" rel="9">Send</button>
+</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -931,7 +963,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion10" href="#collapseOne10"> /login_check</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion10" href="#collapseOne10"> /projects</a>
         </h4>
     </div>
     <div id="collapseOne10" class="panel-collapse collapse">
@@ -948,35 +980,9 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info10">
-                    用户登入检查
+                    项目列表
                     <hr>
                     
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-<tr>
-    <td>email</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>Email</td>
-</tr>
-
-<tr>
-    <td>password</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>密码</td>
-</tr>
-    </tbody>
-</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox10">
@@ -985,17 +991,6 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/login_check" method="GET|POST" name="form10" id="form10">
-    
-<div class="form-group">
-    <input type="text" class="form-control input-sm" id="email" placeholder="email" name="email">
-</div>
-
-<div class="form-group">
-    <input type="text" class="form-control input-sm" id="password" placeholder="password" name="password">
-</div>
-    <button type="submit" class="btn btn-success send" rel="10">Send</button>
-</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -1024,11 +1019,12 @@
         </div>
     </div>
 </div>
+<h2>Project</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion11" href="#collapseOne11"> /projects</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion11" href="#collapseOne11"> /project/settings</a>
         </h4>
     </div>
     <div id="collapseOne11" class="panel-collapse collapse">
@@ -1045,7 +1041,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info11">
-                    项目列表
+                    项目设置
                     <hr>
                     
                 </div><!-- #info -->
@@ -1084,12 +1080,12 @@
         </div>
     </div>
 </div>
-<h2>Project</h2>
+<h2>Code</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion12" href="#collapseOne12"> /project/settings</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion12" href="#collapseOne12"> /code/functions</a>
         </h4>
     </div>
     <div id="collapseOne12" class="panel-collapse collapse">
@@ -1106,7 +1102,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info12">
-                    项目设置
+                    公用函数编辑区
                     <hr>
                     
                 </div><!-- #info -->
@@ -1145,12 +1141,12 @@
         </div>
     </div>
 </div>
-<h2>Code</h2>
+<h2>Project</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion13" href="#collapseOne13"> /code/functions</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion13" href="#collapseOne13"> /project/save</a>
         </h4>
     </div>
     <div id="collapseOne13" class="panel-collapse collapse">
@@ -1167,7 +1163,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info13">
-                    公用函数编辑区
+                    保存项目
                     <hr>
                     
                 </div><!-- #info -->
@@ -1206,12 +1202,11 @@
         </div>
     </div>
 </div>
-<h2>Project</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion14" href="#collapseOne14"> /project/save</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion14" href="#collapseOne14"> /project/file/uploaded</a>
         </h4>
     </div>
     <div id="collapseOne14" class="panel-collapse collapse">
@@ -1228,7 +1223,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info14">
-                    保存项目
+                    打开本地项目文件
                     <hr>
                     
                 </div><!-- #info -->
@@ -1271,7 +1266,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion15" href="#collapseOne15"> /project/file/uploaded</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion15" href="#collapseOne15"> /interface/info/save</a>
         </h4>
     </div>
     <div id="collapseOne15" class="panel-collapse collapse">
@@ -1288,66 +1283,6 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info15">
-                    打开本地项目文件
-                    <hr>
-                    
-                </div><!-- #info -->
-
-                <div class="tab-pane" id="sandbox15">
-                    <div class="row">
-                        <div class="col-md-4">
-                            Parameters
-                            <hr>
-                            
-                        </div>
-                        <div class="col-md-4">
-                            Headers
-                            <hr>Soon...
-                        </div>
-                        <div class="col-md-4">
-                            Response
-                            <hr>
-                            <code id="response15"></code>
-                        </div>
-                    </div>
-                </div><!-- #sandbox -->
-
-                <div class="tab-pane" id="sample15">
-                    <div class="row">
-                        <div class="col-md-12">
-                            
-
-<hr>
-<pre id="sample_response15">{'code': 0,'message': 'success'}</pre>
-                        </div>
-                    </div>
-                </div><!-- #sample -->
-
-            </div><!-- .tab-content -->
-        </div>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion16" href="#collapseOne16"> /interface/info/save</a>
-        </h4>
-    </div>
-    <div id="collapseOne16" class="panel-collapse collapse">
-        <div class="panel-body">
-
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" id="php-apidoctab16">
-                <li class="active"><a href="#info16" data-toggle="tab">Info</a></li>
-                <li><a href="#sandbox16" data-toggle="tab">Sandbox</a></li>
-                <li><a href="#sample16" data-toggle="tab">Sample output</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-
-                <div class="tab-pane active" id="info16">
                     更新项目设置
                     <hr>
                     
@@ -1386,13 +1321,13 @@
 </table>
                 </div><!-- #info -->
 
-                <div class="tab-pane" id="sandbox16">
+                <div class="tab-pane" id="sandbox15">
                     <div class="row">
                         <div class="col-md-4">
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/interface/info/save" method="POST" name="form16" id="form16">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/interface/info/save" method="POST" name="form15" id="form15">
     
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="info" placeholder="info" name="info">
@@ -1405,7 +1340,7 @@
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="modify" placeholder="modify" name="modify">
 </div>
-    <button type="submit" class="btn btn-success send" rel="16">Send</button>
+    <button type="submit" class="btn btn-success send" rel="15">Send</button>
 </form>
                         </div>
                         <div class="col-md-4">
@@ -1415,12 +1350,12 @@
                         <div class="col-md-4">
                             Response
                             <hr>
-                            <code id="response16"></code>
+                            <code id="response15"></code>
                         </div>
                     </div>
                 </div><!-- #sandbox -->
 
-                <div class="tab-pane" id="sample16">
+                <div class="tab-pane" id="sample15">
                     <div class="row">
                         <div class="col-md-12">
                             NA
@@ -1437,23 +1372,23 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion17" href="#collapseOne17"> /code/functions_save</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion16" href="#collapseOne16"> /code/functions_save</a>
         </h4>
     </div>
-    <div id="collapseOne17" class="panel-collapse collapse">
+    <div id="collapseOne16" class="panel-collapse collapse">
         <div class="panel-body">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" id="php-apidoctab17">
-                <li class="active"><a href="#info17" data-toggle="tab">Info</a></li>
-                <li><a href="#sandbox17" data-toggle="tab">Sandbox</a></li>
-                <li><a href="#sample17" data-toggle="tab">Sample output</a></li>
+            <ul class="nav nav-tabs" id="php-apidoctab16">
+                <li class="active"><a href="#info16" data-toggle="tab">Info</a></li>
+                <li><a href="#sandbox16" data-toggle="tab">Sandbox</a></li>
+                <li><a href="#sample16" data-toggle="tab">Sample output</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
 
-                <div class="tab-pane active" id="info17">
+                <div class="tab-pane active" id="info16">
                     保存公共函数
                     <hr>
                     
@@ -1478,18 +1413,18 @@
 </table>
                 </div><!-- #info -->
 
-                <div class="tab-pane" id="sandbox17">
+                <div class="tab-pane" id="sandbox16">
                     <div class="row">
                         <div class="col-md-4">
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/code/functions_save" method="POST" name="form17" id="form17">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/code/functions_save" method="POST" name="form16" id="form16">
     
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="code" placeholder="code" name="code">
 </div>
-    <button type="submit" class="btn btn-success send" rel="17">Send</button>
+    <button type="submit" class="btn btn-success send" rel="16">Send</button>
 </form>
                         </div>
                         <div class="col-md-4">
@@ -1499,18 +1434,18 @@
                         <div class="col-md-4">
                             Response
                             <hr>
-                            <code id="response17"></code>
+                            <code id="response16"></code>
                         </div>
                     </div>
                 </div><!-- #sandbox -->
 
-                <div class="tab-pane" id="sample17">
+                <div class="tab-pane" id="sample16">
                     <div class="row">
                         <div class="col-md-12">
                             
 
 <hr>
-<pre id="sample_response17">{'code': 0,'message': 'success'}</pre>
+<pre id="sample_response16">{'code': 0,'message': 'success'}</pre>
                         </div>
                     </div>
                 </div><!-- #sample -->
@@ -1524,23 +1459,23 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion18" href="#collapseOne18"> /project/settings/update</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion17" href="#collapseOne17"> /project/settings/update</a>
         </h4>
     </div>
-    <div id="collapseOne18" class="panel-collapse collapse">
+    <div id="collapseOne17" class="panel-collapse collapse">
         <div class="panel-body">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" id="php-apidoctab18">
-                <li class="active"><a href="#info18" data-toggle="tab">Info</a></li>
-                <li><a href="#sandbox18" data-toggle="tab">Sandbox</a></li>
-                <li><a href="#sample18" data-toggle="tab">Sample output</a></li>
+            <ul class="nav nav-tabs" id="php-apidoctab17">
+                <li class="active"><a href="#info17" data-toggle="tab">Info</a></li>
+                <li><a href="#sandbox17" data-toggle="tab">Sandbox</a></li>
+                <li><a href="#sample17" data-toggle="tab">Sample output</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
 
-                <div class="tab-pane active" id="info18">
+                <div class="tab-pane active" id="info17">
                     更新项目设置
                     <hr>
                     
@@ -1593,13 +1528,13 @@
 </table>
                 </div><!-- #info -->
 
-                <div class="tab-pane" id="sandbox18">
+                <div class="tab-pane" id="sandbox17">
                     <div class="row">
                         <div class="col-md-4">
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/project/settings/update" method="POST" name="form18" id="form18">
+<form enctype="application/x-www-form-urlencoded" role="form" action="/project/settings/update" method="POST" name="form17" id="form17">
     
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="mysql_host" placeholder="mysql_host" name="mysql_host">
@@ -1620,8 +1555,68 @@
 <div class="form-group">
     <input type="text" class="form-control input-sm" id="mysql_database" placeholder="mysql_database" name="mysql_database">
 </div>
-    <button type="submit" class="btn btn-success send" rel="18">Send</button>
+    <button type="submit" class="btn btn-success send" rel="17">Send</button>
 </form>
+                        </div>
+                        <div class="col-md-4">
+                            Headers
+                            <hr>Soon...
+                        </div>
+                        <div class="col-md-4">
+                            Response
+                            <hr>
+                            <code id="response17"></code>
+                        </div>
+                    </div>
+                </div><!-- #sandbox -->
+
+                <div class="tab-pane" id="sample17">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+
+<hr>
+<pre id="sample_response17">{'code': 0,'message': 'success'}</pre>
+                        </div>
+                    </div>
+                </div><!-- #sample -->
+
+            </div><!-- .tab-content -->
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion18" href="#collapseOne18"> /interface/list</a>
+        </h4>
+    </div>
+    <div id="collapseOne18" class="panel-collapse collapse">
+        <div class="panel-body">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="php-apidoctab18">
+                <li class="active"><a href="#info18" data-toggle="tab">Info</a></li>
+                <li><a href="#sandbox18" data-toggle="tab">Sandbox</a></li>
+                <li><a href="#sample18" data-toggle="tab">Sample output</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="info18">
+                    接口列表
+                    <hr>
+                    
+                </div><!-- #info -->
+
+                <div class="tab-pane" id="sandbox18">
+                    <div class="row">
+                        <div class="col-md-4">
+                            Parameters
+                            <hr>
+                            
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -1650,11 +1645,12 @@
         </div>
     </div>
 </div>
+<h2>User</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion19" href="#collapseOne19"> /interface/list</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion19" href="#collapseOne19"> /logout</a>
         </h4>
     </div>
     <div id="collapseOne19" class="panel-collapse collapse">
@@ -1671,7 +1667,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info19">
-                    接口列表
+                    退出登入
                     <hr>
                     
                 </div><!-- #info -->
@@ -1710,12 +1706,12 @@
         </div>
     </div>
 </div>
-<h2>User</h2>
+<h2>Meta</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion20" href="#collapseOne20"> /logout</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion20" href="#collapseOne20"> /table/fields</a>
         </h4>
     </div>
     <div id="collapseOne20" class="panel-collapse collapse">
@@ -1732,9 +1728,28 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info20">
-                    退出登入
+                    session
                     <hr>
                     
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+<tr>
+    <td>table</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>table</td>
+</tr>
+    </tbody>
+</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox20">
@@ -1743,6 +1758,13 @@
                             Parameters
                             <hr>
                             
+<form enctype="application/x-www-form-urlencoded" role="form" action="/table/fields" method="GET|POST" name="form20" id="form20">
+    
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="table" placeholder="table" name="table">
+</div>
+    <button type="submit" class="btn btn-success send" rel="20">Send</button>
+</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -1771,12 +1793,12 @@
         </div>
     </div>
 </div>
-<h2>Meta</h2>
+<h2>User</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion21" href="#collapseOne21"> /table/fields</a>
+            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion21" href="#collapseOne21"> /session</a>
         </h4>
     </div>
     <div id="collapseOne21" class="panel-collapse collapse">
@@ -1796,25 +1818,6 @@
                     session
                     <hr>
                     
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-<tr>
-    <td>table</td>
-    <td>string</td>
-    <td>Yes</td>
-    <td>table</td>
-</tr>
-    </tbody>
-</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox21">
@@ -1823,13 +1826,6 @@
                             Parameters
                             <hr>
                             
-<form enctype="application/x-www-form-urlencoded" role="form" action="/table/fields" method="GET|POST" name="form21" id="form21">
-    
-<div class="form-group">
-    <input type="text" class="form-control input-sm" id="table" placeholder="table" name="table">
-</div>
-    <button type="submit" class="btn btn-success send" rel="21">Send</button>
-</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -1858,12 +1854,12 @@
         </div>
     </div>
 </div>
-<h2>User</h2>
+<h2>code</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label label-success">GET</span> <a data-toggle="collapse" data-parent="#accordion22" href="#collapseOne22"> /session</a>
+            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion22" href="#collapseOne22"> /code/build</a>
         </h4>
     </div>
     <div id="collapseOne22" class="panel-collapse collapse">
@@ -1880,7 +1876,7 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info22">
-                    session
+                    生成代码块
                     <hr>
                     
                 </div><!-- #info -->
@@ -1919,12 +1915,12 @@
         </div>
     </div>
 </div>
-<h2>code</h2>
+<h2>Project</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <span class="label ">GET|POST</span> <a data-toggle="collapse" data-parent="#accordion23" href="#collapseOne23"> /code/build</a>
+            <span class="label label-primary">POST</span> <a data-toggle="collapse" data-parent="#accordion23" href="#collapseOne23"> /interface/remove</a>
         </h4>
     </div>
     <div id="collapseOne23" class="panel-collapse collapse">
@@ -1941,9 +1937,28 @@
             <div class="tab-content">
 
                 <div class="tab-pane active" id="info23">
-                    生成代码块
+                    删除接口
                     <hr>
                     
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+<tr>
+    <td>id</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td>id</td>
+</tr>
+    </tbody>
+</table>
                 </div><!-- #info -->
 
                 <div class="tab-pane" id="sandbox23">
@@ -1952,6 +1967,13 @@
                             Parameters
                             <hr>
                             
+<form enctype="application/x-www-form-urlencoded" role="form" action="/interface/remove" method="POST" name="form23" id="form23">
+    
+<div class="form-group">
+    <input type="text" class="form-control input-sm" id="id" placeholder="id" name="id">
+</div>
+    <button type="submit" class="btn btn-success send" rel="23">Send</button>
+</form>
                         </div>
                         <div class="col-md-4">
                             Headers
@@ -1980,7 +2002,6 @@
         </div>
     </div>
 </div>
-<h2>Project</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -2046,7 +2067,7 @@
 
         <div class="row mt0 footer">
             <div class="col-md-6" align="left">
-                Generated on 2016-04-14, 20:31:28
+                Generated on 2016-04-16, 12:20:37
             </div>
             <div class="col-md-6" align="right">
                 <a href="https://github.com/calinrada/php-apidoc" target="_blank">php-apidoc v 1.3.4</a>
