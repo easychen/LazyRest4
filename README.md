@@ -31,6 +31,7 @@ composer install --no-dev
 #### 使用Bower安装JS依赖
 
 ```
+cp sample.bowerrc .bowerrc 
 bower install
 ```
 
@@ -63,6 +64,7 @@ $GLOBALS['lpconfig']['admin_password'] = 'your password';
 我们使用PHPMyAdmin来设计数据表。新建一个库，coderemote。总共两张表，一张user表用来存放开发者帐号、领一张code表，用来存放函数。
 
 user表结构如下：
+
 ![](http://ww2.sinaimg.cn/large/40dfde6fjw1f2yh5kcxj4j20hr053myk.jpg)
 
 设计数据表时需要注意以下两点：
@@ -71,6 +73,7 @@ user表结构如下：
 - 每个字段需要添加注释，注释的内容是字段的中文名。
 
 code表结构如下：
+
 ![](http://ww4.sinaimg.cn/large/40dfde6fjw1f2yh6pgkhsj20hr053myk.jpg)
 
 为了方便显示，我们对账户名做了冗余（uname）字段，同时通过private字段来标识是否私有。
@@ -80,6 +83,7 @@ code表结构如下：
 ### 创建新项目
 
 LR4采用项目文件保存数据，所以使用方式类似软件。已有项目可以直接上传项目文件，然后继续，这里我们直接「创建新项目」。
+
 ![](http://ww3.sinaimg.cn/large/40dfde6fjw1f2yh78a9m6j20is0gpdgb.jpg)
 
 在设计接口之前，我们需要把数据库配置下。这样在添加字段时，可以便捷的使用数据库的信息。点击顶导航右侧的⚙图标，设置好Mysql信息。注意这个数据库可以是远程的，并不要一定和LR在一台机器上。
@@ -176,6 +180,7 @@ $password = sha1( $password );
 在这个项目里，我们采用token机制：通过email和密码换取一个token，需要授权的接口，带上这个token来访问。
 
 首先我们来做这个接口，在LR中再新建一个。顺便说句，点击这个图标就可以返回接口列表。
+
 ![](http://ww1.sinaimg.cn/large/40dfde6fjw1f2yhbm258tj202101xjr7.jpg)
 
 将email和password添加为输入字段，设置为必填。
@@ -306,6 +311,7 @@ function lazyrest_auth_check()
 
 #### 修改接口
 id和code作为输入字段；业务逻辑代码选「 修改 」，WHERE子句添加id，选完全匹配。
+
 ![](http://ww4.sinaimg.cn/large/40dfde6fjw1f2yhfsjjtvj20ow0dswf6.jpg)
 
 然后因为只有自己才能修改自己的代码，所以在业务逻辑代码中加上权限检查：
@@ -367,9 +373,11 @@ CodeRemote项目的LR文件，可以 [点击这里查看](./coderemote.demo.txt)
 本来只是做来给自己用的，但因为很多同学表示也想用，就放出来了。写文档解释如何使用什么的挺费事，所以当LazyRest帮你节省了时间和精力之后，可以考虑打赏我一点零花钱 😁
 
 微信
+
 ![](http://ww3.sinaimg.cn/large/40dfde6fjw1f2yhu86w8kj206r06e0t6.jpg)
 
 支付宝
+
 ![](http://ww3.sinaimg.cn/large/40dfde6fjw1f2yhuhxpxij20740730tm.jpg)
 
 
