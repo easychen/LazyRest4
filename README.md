@@ -21,6 +21,9 @@ LazyRest，是一个基于Web的类Rest风格API生成器。LazyRest4（以下�
 Repo地址： https://github.com/easychen/LazyRest4
 
 ### 将apache指定到对应目录
+
+注意，必须将Document Root指定到LR4的根目录，否则会出现路径问题。
+
 ### 初始化项目
 #### 使用composer安装PHP依赖
 
@@ -65,7 +68,7 @@ $GLOBALS['lpconfig']['admin_password'] = 'your password';
 
 user表结构如下：
 
-![](http://ww2.sinaimg.cn/large/40dfde6fjw1f2yh5kcxj4j20hr053myk.jpg)
+![](http://ww2.sinaimg.cn/large/40dfde6fjw1f354o4k1dsj20i003vjsh.jpg)
 
 设计数据表时需要注意以下两点：
 
