@@ -12,53 +12,44 @@ Class RemoteException extends \Lazyphp\Core\RestException {}
 }
 namespace{
 $GLOBALS['meta'] = array (
-  '904d185bb9e369a087f6d0cc6898feb0' => 
+  '5a4a4aca98c3a2919ffe49bb9e2f413d' => 
   array (
     'Description' => 
     array (
       0 => 
       array (
         'section' => 'user',
-        'description' => '帐号注册',
+        'description' => '显示',
       ),
     ),
     'LazyRoute' => 
     array (
       0 => 
       array (
-        'route' => 'POST /account/reg',
+        'route' => 'POST /book/list',
         'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/account/reg")',
+        'ApiRoute' => '(name="/book/list")',
       ),
     ),
     'Params' => 
     array (
       0 => 
       array (
-        'name' => 'password',
+        'name' => 'nickname',
         'filters' => 
         array (
           0 => 'check_not_empty',
         ),
-        'cnname' => '密码',
+        'cnname' => '昵称',
       ),
       1 => 
       array (
-        'name' => 'name',
+        'name' => 'openid',
         'filters' => 
         array (
           0 => 'check_not_empty',
         ),
-        'cnname' => '帐号名',
-      ),
-      2 => 
-      array (
-        'name' => 'email',
-        'filters' => 
-        array (
-          0 => 'check_mail_lr',
-        ),
-        'cnname' => '电子邮件',
+        'cnname' => '',
       ),
     ),
     'Return' => 
@@ -71,92 +62,20 @@ $GLOBALS['meta'] = array (
     ),
     'binding' => 
     array (
-      'password' => 
+      'nickname' => 
       array (
-        'name' => 'password',
+        'name' => 'nickname',
       ),
-      'name' => 
+      'openid' => 
       array (
-        'name' => 'name',
-      ),
-      'email' => 
-      array (
-        'name' => 'email',
+        'name' => 'openid',
       ),
     ),
     'route' => 
     array (
       0 => 
       array (
-        'uri' => 'POST /account/reg',
-        'params' => false,
-      ),
-    ),
-  ),
-  'adf2fcb06b2ee665aff2eb2aabd0b319' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'user',
-        'description' => '获得token',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'POST /account/token',
-        'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/account/token")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'email',
-        'filters' => 
-        array (
-          0 => 'check_email_lr',
-        ),
-        'cnname' => '电子邮件',
-      ),
-      1 => 
-      array (
-        'name' => 'password',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '密码',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'email' => 
-      array (
-        'name' => 'email',
-      ),
-      'password' => 
-      array (
-        'name' => 'password',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'POST /account/token',
+        'uri' => 'POST /book/list',
         'params' => false,
       ),
     ),
@@ -1057,8 +976,7 @@ $GLOBALS['meta'] = array (
   ),
 );
 $app = new \Lazyphp\Core\Application();
-$app->route('POST /account/reg',array( 'Lazyphp\Controller\LazyRestController','user_lcadd_1460691333694'));
-$app->route('POST /account/token',array( 'Lazyphp\Controller\LazyRestController','user_lccustom_1460694654897'));
+$app->route('POST /book/list',array( 'Lazyphp\Controller\LazyRestController','user_lccustom_1578404575446'));
 $app->route('GET|POST /interface/field/add',array( 'Lazyphp\Controller\LazyphpController','field_add'));
 $app->route('GET /',array( 'Lazyphp\Controller\LazyphpController','index'));
 $app->route('GET /login',array( 'Lazyphp\Controller\LazyphpController','login'));

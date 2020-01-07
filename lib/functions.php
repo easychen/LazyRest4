@@ -47,11 +47,11 @@ function twig()
 {
 	if( !isset( $GLOBALS['__LR_TNG'] ) )
 	{
-		$loader = new \Twig_Loader_Filesystem( AROOT . DS . 'codetpl' . DS . 'code' );
+		$loader = new \Twig\Loader\FilesystemLoader( AROOT . DS . 'codetpl' . DS . 'code' );
 
-		$GLOBALS['__LR_TNG'] = new \Twig_Environment($loader);
+		$GLOBALS['__LR_TNG'] = new \Twig\Environment($loader);
 
-		$filter = new Twig_SimpleFilter('join_names', function ( $array)
+		$filter = new  \Twig\TwigFilter('join_names', function ( $array)
 		{
     		$ret = array();
     		foreach( $array as $item )
@@ -61,7 +61,7 @@ function twig()
     		return join(',' , $ret );
 		});
 
-		$filter2 = new Twig_SimpleFilter('clean_ptag', function ( $string )
+		$filter2 = new  \Twig\TwigFilter('clean_ptag', function ( $string )
 		{
     		$string = trim( $string );
     		if( substr( $string , 0 , 5 ) == '<'.'?php' ) $string = substr( $string , 5  );

@@ -7,7 +7,7 @@
 {% endfor %}
 * @ApiReturn(type="object", sample="{'code': 0,'message': 'success'}")
 */
- function {{method}}( {{ settings['input-fileds'] | join_names }} )
+function  {{method}}( {{ settings['input-fileds'] | join_names }} )
 {
 	{% if( settings.ipublic != 1 ) %}return send_error( 'AUTH' , '此接口已暂停服务' );{% endif %}
 

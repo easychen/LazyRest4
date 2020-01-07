@@ -2,7 +2,7 @@
 namespace Lazyphp\Core;
 use \PDO as PDO;
 
-class Database extends Object
+class Database extends LpObject
 {
     var $result = false;
 

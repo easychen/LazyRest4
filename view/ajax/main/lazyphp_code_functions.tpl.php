@@ -8,12 +8,12 @@
 	
 </div>
 <script>
-	var feditor = ace.edit('function_editor');
-	feditor.$blockScrolling = Infinity;
-	feditor.getSession().setMode('ace/mode/php');
-	feditor.setTheme('ace/theme/monokai');
-	feditor.getSession().setUseWrapMode(true);
-	document.getElementById('function_editor').style.fontSize='14px';
+	// var feditor = ace.edit('function_editor');
+	// feditor.$blockScrolling = Infinity;
+	// feditor.getSession().setMode('ace/mode/php');
+	// feditor.setTheme('ace/theme/monokai');
+	// feditor.getSession().setUseWrapMode(true);
+	// document.getElementById('function_editor').style.fontSize='14px';
 
 	<?php if( strlen($data['code']) ): ?>
 	var last_code = $.base64Decode('<?=$data['code']?>');
