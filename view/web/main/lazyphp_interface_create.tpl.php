@@ -330,7 +330,7 @@ $.each( editors , function( index , value )
 	{
 		if( info[value].length > 0 )
 		{
-			editor[value].setValue( info[value] );
+			editor[value].setValue( info[value] , 1 );
 		}	
 	}
 });

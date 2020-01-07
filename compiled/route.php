@@ -12,74 +12,6 @@ Class RemoteException extends \Lazyphp\Core\RestException {}
 }
 namespace{
 $GLOBALS['meta'] = array (
-  '5a4a4aca98c3a2919ffe49bb9e2f413d' => 
-  array (
-    'Description' => 
-    array (
-      0 => 
-      array (
-        'section' => 'user',
-        'description' => '显示',
-      ),
-    ),
-    'LazyRoute' => 
-    array (
-      0 => 
-      array (
-        'route' => 'POST /book/list',
-        'ApiMethod' => '(type="POST")',
-        'ApiRoute' => '(name="/book/list")',
-      ),
-    ),
-    'Params' => 
-    array (
-      0 => 
-      array (
-        'name' => 'nickname',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '昵称',
-      ),
-      1 => 
-      array (
-        'name' => 'openid',
-        'filters' => 
-        array (
-          0 => 'check_not_empty',
-        ),
-        'cnname' => '',
-      ),
-    ),
-    'Return' => 
-    array (
-      0 => 
-      array (
-        'type' => 'object',
-        'sample' => '{\'code\': 0,\'message\': \'success\'}',
-      ),
-    ),
-    'binding' => 
-    array (
-      'nickname' => 
-      array (
-        'name' => 'nickname',
-      ),
-      'openid' => 
-      array (
-        'name' => 'openid',
-      ),
-    ),
-    'route' => 
-    array (
-      0 => 
-      array (
-        'uri' => 'POST /book/list',
-        'params' => false,
-      ),
-    ),
-  ),
   '4350733afab42e2ae0cd9ad4fe27ae3b' => 
   array (
     'Description' => 
@@ -976,7 +908,6 @@ $GLOBALS['meta'] = array (
   ),
 );
 $app = new \Lazyphp\Core\Application();
-$app->route('POST /book/list',array( 'Lazyphp\Controller\LazyRestController','user_lccustom_1578404575446'));
 $app->route('GET|POST /interface/field/add',array( 'Lazyphp\Controller\LazyphpController','field_add'));
 $app->route('GET /',array( 'Lazyphp\Controller\LazyphpController','index'));
 $app->route('GET /login',array( 'Lazyphp\Controller\LazyphpController','login'));
